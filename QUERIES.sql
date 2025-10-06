@@ -64,6 +64,19 @@ AS
 SELECT * FROM items_depositos WHERE cod_item = @cod_item AND nro_deposito = @num_dep
 
 
+--USUARIOS
+CREATE PROCEDURE spu_login_usuarios
+    @usuario NVARCHAR(50),
+    @psw NVARCHAR(200)
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    SELECT COUNT(*) 
+    FROM usuarios
+    WHERE usario = @usuario AND clave = @psw;
+END
+
 
 --DEPOSITOS
 CREATE PROCEDURE spu_cargar_depositos	

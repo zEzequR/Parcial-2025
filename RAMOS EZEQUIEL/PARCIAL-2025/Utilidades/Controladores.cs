@@ -1,4 +1,6 @@
-﻿using System;
+﻿using PARCIAL_2025.Clases;
+using PARCIAL_2025.Formularios;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -201,20 +203,32 @@ namespace PARCIAL_2025.Utilidades
         }
 
 
-        public bool Logincomparision(DataGridView usersTable, (string, string) userInputs, List<(string, string)> users)
+        public bool Logincomparision(string procedureName, List<string> parametersSQL, List<Object> parametros)
         {
-            for (int i = 0; i < (usersTable.RowCount - 1); i++)
+            try
             {
-                users.Add((usersTable.Rows[i].Cells[0].Value.ToString(), usersTable.Rows[i].Cells[1].Value.ToString()));
-            }
-            for (int i = 0; i < users.Count; i++)
-            {
-                if (userInputs.Item1 == users[i].Item1 && userInputs.Item2 == users[i].Item2)
+                SqlCommand cmd = new SqlCommand(procedureName, new Conexion().Connect());
+                cmd.CommandType = CommandType.StoredProcedure;
+                for (int i = 0; i < parametersSQL.Count; i++)
+                {
+                    cmd.Parameters.AddWithValue(parametersSQL[i], parametros[i]);
+                }
+                int respose = Convert.ToInt32(cmd.ExecuteScalar());
+
+                if (respose > 0)
                 {
                     return true;
                 }
+                else
+                {
+                    return false;
+                }
+
             }
-            return false;
+            catch (Exception ex)
+            {
+                return false;
+            }
         }
 
 

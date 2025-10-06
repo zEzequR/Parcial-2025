@@ -36,7 +36,6 @@
             this.userImg = new System.Windows.Forms.PictureBox();
             this.passwrdImg = new System.Windows.Forms.PictureBox();
             this.loginBtn = new System.Windows.Forms.Button();
-            this.usersTable = new System.Windows.Forms.DataGridView();
             this.psswrdDiv = new System.Windows.Forms.TableLayoutPanel();
             this.passwrdInpTxt = new System.Windows.Forms.Label();
             this.passwrdInp = new System.Windows.Forms.TextBox();
@@ -46,7 +45,6 @@
             this.userDiv.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.userImg)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.passwrdImg)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.usersTable)).BeginInit();
             this.psswrdDiv.SuspendLayout();
             this.seePswDiv.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.seePswBtn)).BeginInit();
@@ -64,7 +62,6 @@
             this.loginGrid.Controls.Add(this.userImg, 1, 1);
             this.loginGrid.Controls.Add(this.passwrdImg, 1, 2);
             this.loginGrid.Controls.Add(this.loginBtn, 1, 3);
-            this.loginGrid.Controls.Add(this.usersTable, 1, 0);
             this.loginGrid.Controls.Add(this.psswrdDiv, 2, 2);
             this.loginGrid.Controls.Add(this.seePswDiv, 3, 2);
             this.loginGrid.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -150,15 +147,6 @@
             this.loginBtn.UseVisualStyleBackColor = true;
             this.loginBtn.Click += new System.EventHandler(this.loginBtn_Click);
             // 
-            // usersTable
-            // 
-            this.usersTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.usersTable.Location = new System.Drawing.Point(29, 3);
-            this.usersTable.Name = "usersTable";
-            this.usersTable.Size = new System.Drawing.Size(87, 140);
-            this.usersTable.TabIndex = 5;
-            this.usersTable.Visible = false;
-            // 
             // psswrdDiv
             // 
             this.psswrdDiv.ColumnCount = 1;
@@ -215,9 +203,9 @@
             this.seePswBtn.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.seePswBtn.Cursor = System.Windows.Forms.Cursors.Hand;
             this.seePswBtn.Image = ((System.Drawing.Image)(resources.GetObject("seePswBtn.Image")));
-            this.seePswBtn.Location = new System.Drawing.Point(3, 55);
+            this.seePswBtn.Location = new System.Drawing.Point(3, 56);
             this.seePswBtn.Name = "seePswBtn";
-            this.seePswBtn.Size = new System.Drawing.Size(22, 26);
+            this.seePswBtn.Size = new System.Drawing.Size(22, 23);
             this.seePswBtn.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.seePswBtn.TabIndex = 8;
             this.seePswBtn.TabStop = false;
@@ -242,7 +230,6 @@
             this.userDiv.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.userImg)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.passwrdImg)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.usersTable)).EndInit();
             this.psswrdDiv.ResumeLayout(false);
             this.psswrdDiv.PerformLayout();
             this.seePswDiv.ResumeLayout(false);
@@ -259,7 +246,6 @@
         private System.Windows.Forms.PictureBox userImg;
         private System.Windows.Forms.PictureBox passwrdImg;
         private System.Windows.Forms.Button loginBtn;
-        private System.Windows.Forms.DataGridView usersTable;
         private System.Windows.Forms.TableLayoutPanel userDiv;
         private System.Windows.Forms.TableLayoutPanel psswrdDiv;
         private System.Windows.Forms.Label inpUserTxt;
