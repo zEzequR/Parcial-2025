@@ -1,0 +1,20 @@
+# SQL Server files (no versionar los archivos físicos)
+*.mdf
+*.ndf
+*.ldf
+*.bak
+*.bacpac
+
+# Visual Studio / .NET
+.vs/
+bin/
+obj/
+*.user
+*.suo
+
+# OS
+Thumbs.db
+.DS_Store
+
+# Otros temporales
+*.log
