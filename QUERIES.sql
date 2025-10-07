@@ -47,7 +47,7 @@ CREATE PROCEDURE spu_mostrar_items_depositos
 AS
 SELECT * FROM items_depositos
 
-CREATE PROCEDURE dbo.spu_mostrar_itemsdepositos_x_itemsnu
+CREATE PROCEDURE dbo.spu_mostrar_itemsdepositos_x_items
 @cod_item INT
 AS
 SELECT * FROM items_depositos WHERE cod_item = @cod_item
@@ -63,6 +63,17 @@ CREATE PROCEDURE dbo.spu_mostrar_itemsdepositos_x_dos
 AS
 SELECT * FROM items_depositos WHERE cod_item = @cod_item AND nro_deposito = @num_dep
 
+EXEC spu_mostrar_itemsdepositos_x_dos 1,2
+
+
+SELECT id.cod_item,
+       i.desc_item,
+       id.nro_deposito,
+       d.nombre_deposito,
+       id.cantidad
+FROM dbo.items_depositos AS id
+INNER JOIN dbo.items   AS i ON id.cod_item     = i.cod_item
+INNER JOIN dbo.depositos AS d ON id.nro_deposito = d.nro_deposito;
 
 --USUARIOS
 CREATE PROCEDURE spu_login_usuarios
@@ -191,14 +202,10 @@ EXEC spu_mostrar_items_depositos
 
 SELECT * FROM items_depositos
 
-EXEC spu_mostrar_itemsdepositos_x_dos 1,2
+EXEC spu_eliminar_items_depositos 2,1
 
+EXEC spu_update_items_depositos 2,3,500
 
-SELECT id.cod_item,
-       i.desc_item,
-       id.nro_deposito,
-       d.nombre_deposito,
-       id.cantidad
-FROM dbo.items_depositos AS id
-INNER JOIN dbo.items   AS i ON id.cod_item     = i.cod_item
-INNER JOIN dbo.depositos AS d ON id.nro_deposito = d.nro_deposito;
+EXEC spu_mostrar_itemsdepositos_x_depositos 3
+
+EXEC spu_mostrar_itemsdepositos_x_items 2

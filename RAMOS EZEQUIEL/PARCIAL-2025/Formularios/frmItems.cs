@@ -21,7 +21,7 @@ namespace PARCIAL_2025.Formularios
         {
             InitializeComponent();
             conexion.Connect();
-            controladores.MostrarDatos("spu_mostrar_items", tableItems , new List<string> { "Código de Item", "Descripción de Item", "Precio (ARS)", "Fecha de Vencimiento" });
+            controladores.MostrarDatos("spu_mostrar_items", tableItems , new List<string> { }, new List<object> { }, new List<string> { "Código de Item", "Descripción de Item", "Precio (ARS)", "Fecha de Vencimiento" }, 'N');
             int codItem = controladores.getLastID("dbo.spu_Obtener_codItem");
             codItemInp.Text = codItem.ToString();
         }
@@ -96,8 +96,8 @@ namespace PARCIAL_2025.Formularios
                         decimal.TryParse(precioInp.Text, out decimal precio) && DateTime.TryParse(fechaVtoInp.Text, out DateTime fechaVto))
                     {
                         item = item.setItems(cod_Item, descItemInp.Text, precio, fechaVto);
-                        controladores.AgregarDatos("spu_cargar_items", new List<string> { "@cod_item", "@desc_item", "@precio", "@fecha_vto" },
-                            new List<Object> { item.cod_item, item.desc_item, item.precio, item.fecha_vto });
+                        controladores.subirDatos("spu_cargar_items", new List<string> { "@cod_item", "@desc_item", "@precio", "@fecha_vto" },
+                            new List<Object> { item.cod_item, item.desc_item, item.precio, item.fecha_vto }, 'A');
                     }
                     else
                     {
@@ -108,8 +108,8 @@ namespace PARCIAL_2025.Formularios
                 case 'E':
                     if (int.TryParse(codItemInp.Text, out int parsedCod_Item))
                     {
-                        controladores.EliminarDatos("spu_eliminar_items", new List<string> { "@cod_item" },
-                            new List<Object> { item.cod_item });
+                        controladores.subirDatos("spu_eliminar_items", new List<string> { "@cod_item" },
+                            new List<Object> { item.cod_item }, 'E');
                     }
                     else
                     {
@@ -121,8 +121,8 @@ namespace PARCIAL_2025.Formularios
                         decimal.TryParse(precioInp.Text, out decimal precioParsed) && DateTime.TryParse(fechaVtoInp.Text, out DateTime fechaVtoParsed))
                     {
                         item = item.setItems(cod_ItemParsed, descItemInp.Text, precioParsed, fechaVtoParsed);
-                        controladores.ActualizarDatos("spu_modificar_items", new List<string> { "@cod_item", "@desc_item", "@precio", "@fecha_vto" },
-                            new List<Object> { item.cod_item, item.desc_item, item.precio, item.fecha_vto });
+                        controladores.subirDatos("spu_modificar_items", new List<string> { "@cod_item", "@desc_item", "@precio", "@fecha_vto" },
+                            new List<Object> { item.cod_item, item.desc_item, item.precio, item.fecha_vto }, 'U');
                     }
                     else
                     {
@@ -135,7 +135,7 @@ namespace PARCIAL_2025.Formularios
                     MessageBox.Show("Seleccione una acción válida (Agregar, Eliminar, Actualizar).", "Acción inválida", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     break;
             }
-            controladores.MostrarDatos("spu_mostrar_items", tableItems, new List<string> { "Código de Item", "Descripción de Item", "Precio (ARS)", "Fecha de Vencimiento" });
+            controladores.MostrarDatos("spu_mostrar_items", tableItems, new List<string> { }, new List<object> { }, new List<string> { "Código de Item", "Descripción de Item", "Precio (ARS)", "Fecha de Vencimiento" }, 'N');
             int codItem = controladores.getLastID("dbo.spu_Obtener_codItem");
             codItemInp.Text = codItem.ToString();
             sumbitBtn.Text = "-";

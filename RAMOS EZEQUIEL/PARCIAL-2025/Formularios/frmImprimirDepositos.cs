@@ -27,7 +27,7 @@ namespace PARCIAL_2025.Formularios
             this.rptViewverDep.RefreshReport();
 
             this.rptViewverDep.RefreshReport();
-            DataTable dt = controladores.ObtenerDatosParaReporte("spu_mostrar_depositos");
+            DataTable dt = controladores.getData("spu_mostrar_depositos", new List<string> { }, new List<string> { }, 'N');
 
             this.rptViewverDep.Reset();
             this.rptViewverDep.ProcessingMode = ProcessingMode.Local;

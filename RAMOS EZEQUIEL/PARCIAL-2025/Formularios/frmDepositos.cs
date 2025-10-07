@@ -22,7 +22,7 @@ namespace PARCIAL_2025.Formularios
         {
             InitializeComponent();
             conexion.Connect();
-            controladores.MostrarDatos("spu_mostrar_depositos", tableDepositos, new List<string> { "Número de Depósito", "Nombre de Depósito" });
+            controladores.MostrarDatos("spu_mostrar_depositos", tableDepositos, new List<string> { }, new List<object> { } ,new List<string> { "Número de Depósito", "Nombre de Depósito" }, 'N');
             int nroDep = controladores.getLastID("dbo.spu_Obtener_ID_Deposito");
             numDepInp.Text = nroDep.ToString();
         }
@@ -86,21 +86,21 @@ namespace PARCIAL_2025.Formularios
             {
                 case 'A':
                     deposito = deposito.setDepositos(int.Parse(numDepInp.Text), nomDepInp.Text);
-                    controladores.AgregarDatos("spu_cargar_depositos", new List<string> { "@nro_deposito", "@nombre_deposito" }, new List<Object> { deposito.nro_deposito, deposito.nombre_deposito });
+                    controladores.subirDatos("spu_cargar_depositos", new List<string> { "@nro_deposito", "@nombre_deposito" }, new List<Object> { deposito.nro_deposito, deposito.nombre_deposito }, 'A');
                     break;
                 case 'E':
                     deposito = deposito.setDepositos(int.Parse(numDepInp.Text), nomDepInp.Text);
-                    controladores.EliminarDatos("spu_eliminar_deposito", new List<string> { "@nro_deposito" }, new List<Object> { deposito.nro_deposito });
+                    controladores.subirDatos("spu_eliminar_deposito", new List<string> { "@nro_deposito" }, new List<Object> { deposito.nro_deposito }, 'E');
                     break;
                 case 'U':
                     deposito = deposito.setDepositos(int.Parse(numDepInp.Text), nomDepInp.Text);
-                    controladores.ActualizarDatos("spu_modificar_deposito", new List<string> { "@nro_deposito", "@nombre_deposito" }, new List<Object> { deposito.nro_deposito, deposito.nombre_deposito });
+                    controladores.subirDatos("spu_modificar_deposito", new List<string> { "@nro_deposito", "@nombre_deposito" }, new List<Object> { deposito.nro_deposito, deposito.nombre_deposito }, 'U');
                     break;
                 default:
                     MessageBox.Show("Seleccione una acción válida (Agregar, Eliminar, Actualizar).", "Acción inválida", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     break;
             }
-            controladores.MostrarDatos("spu_mostrar_depositos", tableDepositos , new List<string> { "Número de Depósito", "Nombre de Depósito" });
+            controladores.MostrarDatos("spu_mostrar_depositos", tableDepositos, new List<string> { }, new List<object> { }, new List<string> { "Número de Depósito", "Nombre de Depósito" }, 'N');
             int codItem = controladores.getLastID("dbo.spu_Obtener_ID_Deposito");
             numDepInp.Text = codItem.ToString();
             sumbitBtn.Text = "-";

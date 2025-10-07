@@ -22,7 +22,7 @@ namespace PARCIAL_2025.Formularios
         public frmItemsDeposito()
         {
             InitializeComponent();
-            controladores.MostrarDatos("spu_mostrar_items_depositos", tableItemsDepositos, new List<string> { "Código de Ítem", "Descripción de Ítem", "Número de Depósito", "Nombre de Depósito", "Cantidad" });
+            controladores.MostrarDatos("spu_mostrar_items_depositos", tableItemsDepositos, new List<string> { }, new List<object> { } ,new List<string> { "Código de Ítem", "Descripción de Ítem", "Número de Depósito", "Nombre de Depósito", "Cantidad" }, 'N');
         }
 
         private void addBtn_Click(object sender, EventArgs e)
@@ -79,8 +79,8 @@ namespace PARCIAL_2025.Formularios
                     if (int.TryParse(numItemInp.Text, out int numItem_Inp) && int.TryParse(numDepInp.Text, out int numDep_Inp) && int.TryParse(cantInp.Text, out int cant_Inp))
                     {
                         itemDeposito = itemDeposito.setItems_Depositos(numItem_Inp, numDep_Inp, cant_Inp);
-                        controladores.AgregarDatos("spu_cargar_items_deposito", new List<string> { "@cod_item", "@nro_deposito", "@cantidad" },
-                            new List<Object> { itemDeposito.cod_item, itemDeposito.nro_deposito, itemDeposito.cantidad });
+                        controladores.subirDatos("spu_cargar_items_deposito", new List<string> { "@cod_item", "@nro_deposito", "@cantidad" },
+                            new List<Object> { itemDeposito.cod_item, itemDeposito.nro_deposito, itemDeposito.cantidad }, 'A');
                     }
                     else
                     {
@@ -91,8 +91,9 @@ namespace PARCIAL_2025.Formularios
                 case 'E':
                     if (int.TryParse(numItemInp.Text, out int itemNum) && int.TryParse(numDepInp.Text, out int depNum))
                     {
-                        controladores.EliminarDatos("spu_eliminar_items_depositos", new List<string> { "@cod_item", "@nro_deposito"},
-                            new List<Object> { itemDeposito.cod_item, itemDeposito.nro_deposito});
+                        itemDeposito = itemDeposito.setItems_Depositos(itemNum, depNum, int.TryParse(cantInp.Text, out int cantidadInp) ? cantidadInp : 0);
+                        controladores.subirDatos("spu_eliminar_items_depositos", new List<string> { "@cod_item", "@nro_deposito"},
+                            new List<Object> { itemDeposito.cod_item, itemDeposito.nro_deposito}, 'E');
                     }
                     else
                     {
@@ -105,8 +106,8 @@ namespace PARCIAL_2025.Formularios
                     if (int.TryParse(numItemInp.Text, out int parsedNumItemInp) && int.TryParse(numDepInp.Text, out int parsedNumDepInp) && int.TryParse(cantInp.Text, out int parsedCantInp))
                     {
                         itemDeposito = itemDeposito.setItems_Depositos(parsedNumItemInp, parsedNumDepInp, parsedCantInp);
-                        controladores.ActualizarDatos("spu_update_items_depositos", new List<string> { "@cod_item", "@nro_deposito", "@cantidad" },
-                            new List<Object> { itemDeposito.cod_item, itemDeposito.nro_deposito, itemDeposito.cantidad });
+                        controladores.subirDatos("spu_update_items_depositos", new List<string> { "@cod_item", "@nro_deposito", "@cantidad" },
+                            new List<Object> { itemDeposito.cod_item, itemDeposito.nro_deposito, itemDeposito.cantidad }, 'U');
                     }
                     else
                     {
@@ -118,8 +119,9 @@ namespace PARCIAL_2025.Formularios
                     MessageBox.Show("Seleccione una acción válida (Agregar, Eliminar, Actualizar).", "Acción inválida", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     break;
             }
-            controladores.MostrarDatos("spu_mostrar_items_depositos", tableItemsDepositos, new List<string> { "Código de Ítem", "Descripción de Ítem", "Número de Depósito", "Nombre de Depósito", "Cantidad" });
+            controladores.MostrarDatos("spu_mostrar_items_depositos", tableItemsDepositos, new List<string> { }, new List<object> { }, new List<string> { "Código de Ítem", "Descripción de Ítem", "Número de Depósito", "Nombre de Depósito", "Cantidad" }, 'N');
             controladores.LimpiarCampos(new List<System.Windows.Forms.TextBox> { numItemInp, numDepInp, cantInp });
+            sumbitBtn.Text = "-";
             status = 'N';
         }
 
@@ -128,11 +130,11 @@ namespace PARCIAL_2025.Formularios
             mode = 'I';
             if (int.TryParse(verXitemInp.Text, out int verXItem))
             {
-                controladores.MostrarDatosV2("spu_mostrar_itemsdepositos_x_items", tableItemsDepositos,
+                controladores.MostrarDatos("spu_mostrar_itemsdepositos_x_items", tableItemsDepositos,
                     new List<string> { "@cod_item" },
                     new List<object> { verXItem },
-                    new List<string> { "Código de Ítem", "Descripción de Ítem", "Número de Depósito", "Nombre de Depósito", "Cantidad" });
-                controladores.LimpiarCampos(new List<System.Windows.Forms.TextBox> { verXitemInp });
+                    new List<string> { "Código de Ítem", "Descripción de Ítem", "Número de Depósito", "Nombre de Depósito", "Cantidad" },
+                    'P');
             }
             else
             {
@@ -147,11 +149,10 @@ namespace PARCIAL_2025.Formularios
             mode = 'D';
             if (int.TryParse(verXDepInp.Text, out int verXDep))
             {
-                controladores.MostrarDatosV2("spu_mostrar_itemsdepositos_x_depositos", tableItemsDepositos,
+                controladores.MostrarDatos("spu_mostrar_itemsdepositos_x_depositos", tableItemsDepositos,
                     new List<string> { "@num_dep" },
                     new List<object> { verXDep },
-                    new List<string> { "Código de Ítem", "Descripción de Ítem", "Número de Depósito", "Nombre de Depósito", "Cantidad" });
-                controladores.LimpiarCampos(new List<System.Windows.Forms.TextBox> { verXDepInp });
+                    new List<string> { "Código de Ítem", "Descripción de Ítem", "Número de Depósito", "Nombre de Depósito", "Cantidad" }, 'P');
             }
             else
             {
@@ -165,11 +166,12 @@ namespace PARCIAL_2025.Formularios
             mode = '2';
             if (int.TryParse(verXitemInp.Text, out int verXItem) && int.TryParse(verXDepInp.Text, out int verXDep))
             {
-                controladores.MostrarDatosV2("spu_mostrar_itemsdepositos_x_dos", tableItemsDepositos,
+                controladores.MostrarDatos("spu_mostrar_itemsdepositos_x_dos", tableItemsDepositos,
                     new List<string> { "@cod_item", "@num_dep" },
                     new List<object> { verXItem, verXDep },
-                    new List<string> { "Código de Ítem", "Descripción de Ítem", "Número de Depósito", "Nombre de Depósito", "Cantidad" });
-                controladores.LimpiarCampos(new List<System.Windows.Forms.TextBox> { verXitemInp, verXDepInp });
+                    new List<string> { "Código de Ítem", "Descripción de Ítem", "Número de Depósito", "Nombre de Depósito", "Cantidad" },
+                    'P');
+                
             }
             else
             {
@@ -181,7 +183,7 @@ namespace PARCIAL_2025.Formularios
         private void verTodosBtn_Click(object sender, EventArgs e)
         {
             mode = 'T';
-            controladores.MostrarDatos("spu_mostrar_items_depositos", tableItemsDepositos, new List<string> { "Código de Ítem", "Descripción de Ítem", "Número de Depósito", "Nombre de Depósito", "Cantidad" });
+            controladores.MostrarDatos("spu_mostrar_items_depositos", tableItemsDepositos, new List<string> { }, new List<object> { }, new List<string> { "Código de Ítem", "Descripción de Ítem", "Número de Depósito", "Nombre de Depósito", "Cantidad" }, 'N');
             controladores.LimpiarCampos(new List<System.Windows.Forms.TextBox> { verXitemInp, verXDepInp });
         }
 
@@ -192,14 +194,17 @@ namespace PARCIAL_2025.Formularios
                 case 'I':
                     frmImprimirStock imprimirStockXItems = new frmImprimirStock('I', new List<string> { verXitemInp.Text });
                     imprimirStockXItems.ShowDialog();
+                    controladores.LimpiarCampos(new List<System.Windows.Forms.TextBox> { verXitemInp });
                     break;
                 case 'D':
                     frmImprimirStock imprimirStockXDepositos = new frmImprimirStock('D', new List<string> { verXDepInp.Text });
                     imprimirStockXDepositos.ShowDialog();
+                    controladores.LimpiarCampos(new List<System.Windows.Forms.TextBox> { verXDepInp });
                     break;
                 case '2':
                     frmImprimirStock imprimirStockXItemsyDepositos = new frmImprimirStock('2', new List<string> { verXitemInp.Text, verXDepInp.Text });
                     imprimirStockXItemsyDepositos.ShowDialog();
+                    controladores.LimpiarCampos(new List<System.Windows.Forms.TextBox> { verXitemInp, verXDepInp });
                     break;
                 case 'T':
                     frmImprimirStock imprimirStock = new frmImprimirStock('T', new List<string> {  });

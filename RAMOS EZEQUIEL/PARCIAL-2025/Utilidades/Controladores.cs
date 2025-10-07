@@ -23,126 +23,140 @@ namespace PARCIAL_2025.Utilidades
             formSelected.Show();
         }
 
-        public void MostrarDatos(string procedureName, DataGridView tableName, List<String> TitleLists)
+        public void MostrarDatos(string procedureName, DataGridView tableName, List<string> sqlParameters, List<object> parameters, List<String> TitleLists, char mode)
         {
-            var da = new SqlDataAdapter(procedureName, new Conexion().Connect());
-            da.SelectCommand.CommandType = CommandType.StoredProcedure;
-            var dt = new DataTable();
-            da.Fill(dt);
-            tableName.DataSource = dt;
-            foreach (DataGridViewColumn column in tableName.Columns)
+            if(mode == 'N')
             {
-                tableName.Columns[column.Index].HeaderText = TitleLists[column.Index];
+                try
+                {
+                    var da = new SqlDataAdapter(procedureName, new Conexion().Connect());
+                    da.SelectCommand.CommandType = CommandType.StoredProcedure;
+                    var dt = new DataTable();
+                    da.Fill(dt);
+                    tableName.DataSource = dt;
+                    foreach (DataGridViewColumn column in tableName.Columns)
+                    {
+                        tableName.Columns[column.Index].HeaderText = TitleLists[column.Index];
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Ocurrió un error al buscar los datos: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else
+            {
+                try
+                {
+                    SqlCommand cmd = new SqlCommand(procedureName, new Conexion().Connect());
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    for (int i = 0; i < sqlParameters.Count; i++)
+                    {
+                        cmd.Parameters.AddWithValue(sqlParameters[i], parameters[i]);
+                    }
+                    SqlDataAdapter da = new SqlDataAdapter(cmd);
+                    DataTable dt = new DataTable();
+                    da.Fill(dt);
+                    tableName.DataSource = dt;
+                    foreach (DataGridViewColumn column in tableName.Columns)
+                    {
+                        tableName.Columns[column.Index].HeaderText = TitleLists[column.Index];
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Ocurrió un error al buscar los datos: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
 
 
-        public void MostrarDatosV2(string procedureName, DataGridView tableName, List<string> sqlParameters, List<object> parameters, List<String> TitleLists)
+        public void subirDatos(string procedureName, List<string> sqlParameters, List<Object> parametros, char mode)
         {
-            try
+            if (mode == 'A')
             {
-                SqlCommand cmd = new SqlCommand(procedureName, new Conexion().Connect());
-                cmd.CommandType = CommandType.StoredProcedure;
-                for (int i = 0; i < sqlParameters.Count; i++)
+                try
                 {
-                    cmd.Parameters.AddWithValue(sqlParameters[i], parameters[i]);
+                    SqlCommand cmd = new SqlCommand(procedureName, new Conexion().Connect());
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    for (int i = 0; i < sqlParameters.Count; i++)
+                    {
+                        cmd.Parameters.AddWithValue(sqlParameters[i], parametros[i]);
+                    }
+                    cmd.ExecuteNonQuery();
                 }
-                SqlDataAdapter da = new SqlDataAdapter(cmd);
-                DataTable dt = new DataTable();
-                da.Fill(dt);
-                tableName.DataSource = dt;
-                foreach (DataGridViewColumn column in tableName.Columns)
+                catch (SqlException ex)
                 {
-                    tableName.Columns[column.Index].HeaderText = TitleLists[column.Index];
+                    switch (ex.Number)
+                    {
+                        case 2627:
+                            MessageBox.Show("ID ya existente. Por favor, verifique los datos ingresados.", "Error de duplicado", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            break;
+                        case 547:
+                            MessageBox.Show("ID no encontrado, porfavor ingrese un ID existente", "Error de referencia", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            break;
+                        case 515:
+                            MessageBox.Show("No se permiten valores nulos en uno o más campos. Por favor, complete todos los campos requeridos.", "Error de valor nulo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            break;
+                        case 8114:
+                            MessageBox.Show("Tipo de dato incorrecto. Por favor, verifique los datos ingresados.", "Error de tipo de dato", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            break;
+                        default:
+                            MessageBox.Show("Ocurrió un error al agregar los datos: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            break;
+                    }
                 }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Ocurrió un error al buscar los datos: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-
-        public void AgregarDatos(string procedureName, List<string> sqlParameters, List<Object> parametros)
-        {
-            try
-            {
-                SqlCommand cmd = new SqlCommand(procedureName, new Conexion().Connect());
-                cmd.CommandType = CommandType.StoredProcedure;
-                for (int i = 0; i < sqlParameters.Count; i++)
+                catch (Exception ex)
                 {
-                    cmd.Parameters.AddWithValue(sqlParameters[i], parametros[i]);
-                }
-                cmd.ExecuteNonQuery();
-            }
-            catch (SqlException ex)
-            {
-                switch (ex.Number)
-                {
-                    case 2627:
-                        MessageBox.Show("ID ya existente. Por favor, verifique los datos ingresados.", "Error de duplicado", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        break;
-                    case 547:
-                        MessageBox.Show("ID no encontrado, porfavor ingrese un ID existente", "Error de referencia", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        break;
-                    case 515:
-                        MessageBox.Show("No se permiten valores nulos en uno o más campos. Por favor, complete todos los campos requeridos.", "Error de valor nulo", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        break;
-                    case 8114:
-                        MessageBox.Show("Tipo de dato incorrecto. Por favor, verifique los datos ingresados.", "Error de tipo de dato", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        break;
-                    default:
-                        MessageBox.Show("Ocurrió un error al agregar los datos: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        break;
+                    MessageBox.Show("Ocurrió un error inesperado: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
-            catch (Exception ex)
+            else if (mode == 'E' || mode == 'U')
             {
-                MessageBox.Show("Ocurrió un error inesperado: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        public void EliminarDatos(string procedureName, List<string> sqlParameters, List<Object> parametros)
-        {
-            SqlCommand cmd = new SqlCommand(procedureName, new Conexion().Connect());
-            cmd.CommandType = CommandType.StoredProcedure;
-            for (int i = 0; i < sqlParameters.Count; i++)
-            {
-                cmd.Parameters.AddWithValue(sqlParameters[i], parametros[i]);
-            }
-            cmd.ExecuteNonQuery();
-        }
-
-        public void ActualizarDatos(string procedureName, List<string> sqlParameters, List<Object> parametros)
-        {
-            try
-            {
-                SqlCommand cmd = new SqlCommand(procedureName, new Conexion().Connect());
-                cmd.CommandType = CommandType.StoredProcedure;
-                for (int i = 0; i < sqlParameters.Count; i++)
+                try
                 {
-                    cmd.Parameters.AddWithValue(sqlParameters[i], parametros[i]);
+                    SqlCommand cmd = new SqlCommand(procedureName, new Conexion().Connect());
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    for (int i = 0; i < sqlParameters.Count; i++)
+                    {
+                        cmd.Parameters.AddWithValue(sqlParameters[i], parametros[i]);
+                    }
+                    cmd.ExecuteNonQuery();
                 }
-                cmd.ExecuteNonQuery();
-            }
-            catch (SqlException ex)
-            {
-                switch (ex.Number)
+                catch (SqlException ex)
                 {
-                    case 2627:
-                        MessageBox.Show("ID ya existente. Por favor, verifique los datos ingresados.", "Error de duplicado", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        break;
-                    case 547:
-                        MessageBox.Show("ID no encontrado, porfavor ingrese un ID existente", "Error de referencia", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        break;
-                    default:
-                        MessageBox.Show("Ocurrió un error al agregar los datos: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        break;
+                    if (mode == 'E')
+                    {
+                        switch (ex.Number)
+                        {
+                            case 547:
+                                MessageBox.Show("ID no encontrado, porfavor ingrese un ID existente", "Error de referencia", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                break;
+                            default:
+                                MessageBox.Show("Ocurrió un error al eliminar los datos: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                break;
+                        }
+                    }
+                    else
+                    {
+                        switch (ex.Number)
+                        {
+                            case 2627:
+                                MessageBox.Show("ID ya existente. Por favor, verifique los datos ingresados.", "Error de duplicado", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                break;
+                            case 547:
+                                MessageBox.Show("ID no encontrado, porfavor ingrese un ID existente", "Error de referencia", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                break;
+                            default:
+                                MessageBox.Show("Ocurrió un error al modificar los datos: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                break;
+                        }
+                    }
                 }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Ocurrió un error inesperado: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Ocurrió un error inesperado: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
 
@@ -158,7 +172,6 @@ namespace PARCIAL_2025.Utilidades
             cmd.Parameters.Add(outputParam);
             cmd.ExecuteNonQuery();
 
-            // Leer el valor del parámetro OUTPUT
             lastID = (int)outputParam.Value;
             cmd.ExecuteNonQuery();
 
@@ -166,40 +179,56 @@ namespace PARCIAL_2025.Utilidades
         }
 
 
-        public DataTable ObtenerDatosParaReporte(string procedureName)
+        public DataTable getData(string procedureName, List<string> SQLParameters, List<string> Parameters, char mode)
         {
-            var dt = new DataTable();
-
-            using (SqlConnection conn = new Conexion().Connect())
-            using (SqlCommand cmd = new SqlCommand(procedureName, conn))
-            using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+            if (mode == 'N')
             {
-                cmd.CommandType = CommandType.StoredProcedure;
-
-                da.Fill(dt);
-            }
-
-            return dt;
-        }
-
-        public DataTable ObtenerDatosParaReporteXparametros(string procedureName, List<string> SQLParameters, List<string> Parameters)
-        {
-            var dt = new DataTable();
-
-            using (SqlConnection conn = new Conexion().Connect())
-            using (SqlCommand cmd = new SqlCommand(procedureName, conn))
-            using (SqlDataAdapter da = new SqlDataAdapter(cmd))
-            {
-                cmd.CommandType = CommandType.StoredProcedure;
-                for (int i = 0; i < SQLParameters.Count; i++)
+                try
                 {
-                    cmd.Parameters.AddWithValue(SQLParameters[i], 1);
+                    var dt = new DataTable();
+
+                    using (SqlConnection conn = new Conexion().Connect())
+                    using (SqlCommand cmd = new SqlCommand(procedureName, conn))
+                    using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+
+                        da.Fill(dt);
+                    }
+
+                    return dt;
                 }
-
-                da.Fill(dt);
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Ocurrió un error al obtener los datos: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return null;
+                }
             }
-
-            return dt;
+            else
+            {
+                try
+                {
+                    System.Diagnostics.Debug.WriteLine("ENTRO");
+                    SqlCommand cmd = new SqlCommand(procedureName, new Conexion().Connect());
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    for (int i = 0; i < SQLParameters.Count; i++)
+                    {
+                        System.Diagnostics.Debug.WriteLine("PARAMETRO: " + SQLParameters[i] + " - " + Parameters[i]);
+                        cmd.Parameters.AddWithValue(SQLParameters[i], Parameters[i]);
+                    }
+                    var response = cmd.ExecuteNonQuery();
+                    System.Diagnostics.Debug.WriteLine("RESPUESTA: " + response);
+                    SqlDataAdapter da = new SqlDataAdapter(cmd);
+                    DataTable dt = new DataTable();
+                    da.Fill(dt);
+                    return dt;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Ocurrió un error al obtener los datos: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return null;
+                }
+            }
         }
 
 
@@ -230,7 +259,6 @@ namespace PARCIAL_2025.Utilidades
                 return false;
             }
         }
-
 
         public void LimpiarCampos(List<TextBox> textBoxes)
         {

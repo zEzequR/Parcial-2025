@@ -23,9 +23,9 @@ namespace PARCIAL_2025.Formularios
             {
                 case 'I':
                     this.rptViewverStock.RefreshReport();
-                    DataTable dtI = controladores.ObtenerDatosParaReporteXparametros("spu_mostrar_itemsdepositos_x_items", 
+                    DataTable dtI = controladores.getData("spu_mostrar_itemsdepositos_x_items",
                         new List<string> { "@cod_item" },
-                        parameters);
+                        parameters, 'P');
 
                     this.rptViewverStock.Reset();
                     this.rptViewverStock.ProcessingMode = ProcessingMode.Local;
@@ -38,9 +38,9 @@ namespace PARCIAL_2025.Formularios
                     break;
                 case 'D':
                     this.rptViewverStock.RefreshReport();
-                    DataTable dtD = controladores.ObtenerDatosParaReporteXparametros("spu_mostrar_itemsdepositos_x_depositos",
+                    DataTable dtD = controladores.getData("spu_mostrar_itemsdepositos_x_depositos",
                         new List<string> { "@num_dep" },
-                        parameters);
+                        parameters, 'P');
 
                     this.rptViewverStock.Reset();
                     this.rptViewverStock.ProcessingMode = ProcessingMode.Local;
@@ -53,9 +53,9 @@ namespace PARCIAL_2025.Formularios
                     break;
                 case '2':
                     this.rptViewverStock.RefreshReport();
-                    DataTable dt2 = controladores.ObtenerDatosParaReporteXparametros("spu_mostrar_itemsdepositos_x_dos",
+                    DataTable dt2 = controladores.getData("spu_mostrar_itemsdepositos_x_dos",
                         new List<string> { "@cod_item", "@num_dep" },
-                        parameters);
+                        parameters, 'P');
 
                     this.rptViewverStock.Reset();
                     this.rptViewverStock.ProcessingMode = ProcessingMode.Local;
@@ -68,7 +68,7 @@ namespace PARCIAL_2025.Formularios
                     break;
                 case 'T':
                     this.rptViewverStock.RefreshReport();
-                    DataTable dt = controladores.ObtenerDatosParaReporte("spu_mostrar_items_depositos");
+                    DataTable dt = controladores.getData("spu_mostrar_items_depositos", new List<string> { }, new List<string> { }, 'N');
 
                     this.rptViewverStock.Reset();
                     this.rptViewverStock.ProcessingMode = ProcessingMode.Local;

@@ -23,7 +23,6 @@ namespace PARCIAL_2025
         {
             InitializeComponent();
             conexion.Connect();
-            controladores.MostrarDatos("spu_mostrar_usuarios", usersTable, new List<string> {"Nombre de usuario", "Contraseña"});
         }
 
         private void loginBtn_Click(object sender, EventArgs e)
