@@ -20,7 +20,6 @@ namespace PARCIAL_2025.Utilidades
             {
                 connection.Open();
                 cmd.Connection = connection;
-                MessageBox.Show("Conexión exitosa a la base de datos.", "Conexión", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return connection;
             }
             catch (Exception ex)

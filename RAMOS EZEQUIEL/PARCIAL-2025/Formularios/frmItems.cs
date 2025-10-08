@@ -77,8 +77,13 @@ namespace PARCIAL_2025.Formularios
             }
         }
 
-        private void tableItems_CellContentClick(object sender, DataGridViewCellEventArgs e)
+
+        private void tableItems_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+            if (e.RowIndex == -1)
+            {
+                return;
+            }
             codItemInp.Text = tableItems.Rows[e.RowIndex].Cells[0].Value.ToString();
             descItemInp.Text = tableItems.Rows[e.RowIndex].Cells[1].Value.ToString();
             precioInp.Text = tableItems.Rows[e.RowIndex].Cells[2].Value.ToString();

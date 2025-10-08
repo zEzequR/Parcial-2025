@@ -64,8 +64,13 @@ namespace PARCIAL_2025.Formularios
             }
         }
 
-        private void tableItemsDepositos_CellContentClick(object sender, DataGridViewCellEventArgs e)
+
+        private void tableItemsDepositos_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+            if (e.RowIndex == -1)
+            {
+                return;
+            }
             numItemInp.Text = tableItemsDepositos.CurrentRow.Cells[0].Value.ToString();
             numDepInp.Text = tableItemsDepositos.CurrentRow.Cells[2].Value.ToString();
             cantInp.Text = tableItemsDepositos.CurrentRow.Cells[4].Value.ToString();
@@ -138,7 +143,7 @@ namespace PARCIAL_2025.Formularios
             }
             else
             {
-                MessageBox.Show("Por favor, ingrese un ID de depósito válido", "Datos inválidos", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Por favor, ingrese un ID de ítem válido", "Datos inválidos", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 controladores.LimpiarCampos(new List<System.Windows.Forms.TextBox> { verXitemInp });
             }
 

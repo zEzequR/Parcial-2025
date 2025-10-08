@@ -274,15 +274,18 @@
             // 
             // tableItemsDepositos
             // 
+            this.tableItemsDepositos.AllowUserToAddRows = false;
+            this.tableItemsDepositos.AllowUserToDeleteRows = false;
             this.tableItemsDepositos.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.tableItemsDepositos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gridDepositos.SetColumnSpan(this.tableItemsDepositos, 4);
             this.tableItemsDepositos.Location = new System.Drawing.Point(43, 106);
             this.tableItemsDepositos.Name = "tableItemsDepositos";
+            this.tableItemsDepositos.ReadOnly = true;
             this.gridDepositos.SetRowSpan(this.tableItemsDepositos, 4);
             this.tableItemsDepositos.Size = new System.Drawing.Size(667, 256);
             this.tableItemsDepositos.TabIndex = 0;
-            this.tableItemsDepositos.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.tableItemsDepositos_CellContentClick);
+            this.tableItemsDepositos.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.tableItemsDepositos_CellClick);
             // 
             // numDepInp
             // 

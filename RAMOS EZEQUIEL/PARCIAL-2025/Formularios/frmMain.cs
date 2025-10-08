@@ -68,6 +68,7 @@ namespace PARCIAL_2025.Formularios
                 SqlCommand cmd = new SqlCommand(procedureName, new Conexion().Connect());
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.ExecuteNonQuery();
+                MessageBox.Show("Backup realizado con éxito.", "Backup", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (SqlException ex)
             {

@@ -72,8 +72,12 @@ namespace PARCIAL_2025.Formularios
         }
 
 
-        private void tableDepositos_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void tableDepositos_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+            if (e.RowIndex == -1)
+            {
+                return;
+            }
             numDepInp.Text = tableDepositos.Rows[e.RowIndex].Cells[0].Value.ToString();
             nomDepInp.Text = tableDepositos.Rows[e.RowIndex].Cells[1].Value.ToString();
             deposito = deposito.setDepositos(Convert.ToInt32(numDepInp.Text), nomDepInp.Text);

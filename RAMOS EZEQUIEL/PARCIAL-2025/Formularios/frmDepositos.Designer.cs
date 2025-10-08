@@ -54,7 +54,7 @@
             this.gridDepositos.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 24.4168F));
             this.gridDepositos.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 41.78404F));
             this.gridDepositos.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 88F));
-            this.gridDepositos.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
+            this.gridDepositos.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 84F));
             this.gridDepositos.Controls.Add(this.addBtn, 4, 1);
             this.gridDepositos.Controls.Add(this.deleteBtn, 4, 2);
             this.gridDepositos.Controls.Add(this.nameDepTxt, 1, 5);
@@ -84,7 +84,7 @@
             this.addBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
             this.addBtn.Cursor = System.Windows.Forms.Cursors.Hand;
             this.addBtn.Image = ((System.Drawing.Image)(resources.GetObject("addBtn.Image")));
-            this.addBtn.Location = new System.Drawing.Point(633, 31);
+            this.addBtn.Location = new System.Drawing.Point(629, 31);
             this.addBtn.Name = "addBtn";
             this.addBtn.Size = new System.Drawing.Size(82, 78);
             this.addBtn.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -98,7 +98,7 @@
             this.deleteBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
             this.deleteBtn.Cursor = System.Windows.Forms.Cursors.Hand;
             this.deleteBtn.Image = ((System.Drawing.Image)(resources.GetObject("deleteBtn.Image")));
-            this.deleteBtn.Location = new System.Drawing.Point(633, 115);
+            this.deleteBtn.Location = new System.Drawing.Point(629, 115);
             this.deleteBtn.Name = "deleteBtn";
             this.deleteBtn.Size = new System.Drawing.Size(82, 73);
             this.deleteBtn.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -123,9 +123,9 @@
             this.idTxt.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.idTxt.AutoSize = true;
             this.idTxt.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.idTxt.Location = new System.Drawing.Point(67, 295);
+            this.idTxt.Location = new System.Drawing.Point(95, 286);
             this.idTxt.Name = "idTxt";
-            this.idTxt.Size = new System.Drawing.Size(142, 17);
+            this.idTxt.Size = new System.Drawing.Size(85, 34);
             this.idTxt.TabIndex = 4;
             this.idTxt.Text = "Número de depósito";
             this.idTxt.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -135,7 +135,7 @@
             this.nomDepInp.AcceptsTab = true;
             this.nomDepInp.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.nomDepInp.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nomDepInp.Location = new System.Drawing.Point(217, 346);
+            this.nomDepInp.Location = new System.Drawing.Point(215, 346);
             this.nomDepInp.Name = "nomDepInp";
             this.nomDepInp.Size = new System.Drawing.Size(144, 21);
             this.nomDepInp.TabIndex = 8;
@@ -145,7 +145,7 @@
             this.numDepInp.AcceptsTab = true;
             this.numDepInp.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.numDepInp.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numDepInp.Location = new System.Drawing.Point(217, 293);
+            this.numDepInp.Location = new System.Drawing.Point(215, 293);
             this.numDepInp.Name = "numDepInp";
             this.numDepInp.ReadOnly = true;
             this.numDepInp.Size = new System.Drawing.Size(144, 21);
@@ -153,21 +153,24 @@
             // 
             // tableDepositos
             // 
+            this.tableDepositos.AllowUserToAddRows = false;
+            this.tableDepositos.AllowUserToDeleteRows = false;
             this.tableDepositos.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.tableDepositos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gridDepositos.SetColumnSpan(this.tableDepositos, 3);
             this.tableDepositos.Location = new System.Drawing.Point(67, 31);
             this.tableDepositos.Name = "tableDepositos";
+            this.tableDepositos.ReadOnly = true;
             this.gridDepositos.SetRowSpan(this.tableDepositos, 3);
-            this.tableDepositos.Size = new System.Drawing.Size(560, 240);
+            this.tableDepositos.Size = new System.Drawing.Size(556, 240);
             this.tableDepositos.TabIndex = 0;
-            this.tableDepositos.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.tableDepositos_CellContentClick);
+            this.tableDepositos.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.tableDepositos_CellClick);
             // 
             // sumbitBtn
             // 
             this.sumbitBtn.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.gridDepositos.SetColumnSpan(this.sumbitBtn, 2);
-            this.sumbitBtn.Location = new System.Drawing.Point(160, 391);
+            this.sumbitBtn.Location = new System.Drawing.Point(159, 391);
             this.sumbitBtn.Name = "sumbitBtn";
             this.sumbitBtn.Size = new System.Drawing.Size(110, 27);
             this.sumbitBtn.TabIndex = 6;
@@ -181,7 +184,7 @@
             this.updateBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
             this.updateBtn.Cursor = System.Windows.Forms.Cursors.Hand;
             this.updateBtn.Image = ((System.Drawing.Image)(resources.GetObject("updateBtn.Image")));
-            this.updateBtn.Location = new System.Drawing.Point(633, 194);
+            this.updateBtn.Location = new System.Drawing.Point(629, 194);
             this.updateBtn.Name = "updateBtn";
             this.updateBtn.Size = new System.Drawing.Size(82, 77);
             this.updateBtn.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;

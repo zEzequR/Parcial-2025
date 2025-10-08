@@ -208,12 +208,10 @@ namespace PARCIAL_2025.Utilidades
             {
                 try
                 {
-                    System.Diagnostics.Debug.WriteLine("ENTRO");
                     SqlCommand cmd = new SqlCommand(procedureName, new Conexion().Connect());
                     cmd.CommandType = CommandType.StoredProcedure;
                     for (int i = 0; i < SQLParameters.Count; i++)
                     {
-                        System.Diagnostics.Debug.WriteLine("PARAMETRO: " + SQLParameters[i] + " - " + Parameters[i]);
                         cmd.Parameters.AddWithValue(SQLParameters[i], Parameters[i]);
                     }
                     var response = cmd.ExecuteNonQuery();

@@ -58,7 +58,7 @@
             this.gridItem.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 24.4168F));
             this.gridItem.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 41.78404F));
             this.gridItem.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 85F));
-            this.gridItem.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 87F));
+            this.gridItem.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 91F));
             this.gridItem.Controls.Add(this.descItemTxt, 1, 5);
             this.gridItem.Controls.Add(this.codItemTxt, 1, 4);
             this.gridItem.Controls.Add(this.descItemInp, 2, 5);
@@ -94,7 +94,7 @@
             this.descItemTxt.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.descItemTxt.AutoSize = true;
             this.descItemTxt.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.descItemTxt.Location = new System.Drawing.Point(67, 284);
+            this.descItemTxt.Location = new System.Drawing.Point(66, 284);
             this.descItemTxt.Name = "descItemTxt";
             this.descItemTxt.Size = new System.Drawing.Size(137, 17);
             this.descItemTxt.TabIndex = 5;
@@ -106,7 +106,7 @@
             this.codItemTxt.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.codItemTxt.AutoSize = true;
             this.codItemTxt.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.codItemTxt.Location = new System.Drawing.Point(81, 253);
+            this.codItemTxt.Location = new System.Drawing.Point(80, 253);
             this.codItemTxt.Name = "codItemTxt";
             this.codItemTxt.Size = new System.Drawing.Size(112, 17);
             this.codItemTxt.TabIndex = 4;
@@ -118,7 +118,7 @@
             this.descItemInp.AcceptsTab = true;
             this.descItemInp.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.descItemInp.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.descItemInp.Location = new System.Drawing.Point(215, 282);
+            this.descItemInp.Location = new System.Drawing.Point(213, 282);
             this.descItemInp.Name = "descItemInp";
             this.descItemInp.Size = new System.Drawing.Size(144, 21);
             this.descItemInp.TabIndex = 8;
@@ -128,7 +128,7 @@
             this.codItemInp.AcceptsTab = true;
             this.codItemInp.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.codItemInp.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.codItemInp.Location = new System.Drawing.Point(215, 251);
+            this.codItemInp.Location = new System.Drawing.Point(213, 251);
             this.codItemInp.Name = "codItemInp";
             this.codItemInp.ReadOnly = true;
             this.codItemInp.Size = new System.Drawing.Size(144, 21);
@@ -136,23 +136,26 @@
             // 
             // tableItems
             // 
+            this.tableItems.AllowUserToAddRows = false;
+            this.tableItems.AllowUserToDeleteRows = false;
             this.tableItems.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.tableItems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gridItem.SetColumnSpan(this.tableItems, 3);
             this.tableItems.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableItems.Location = new System.Drawing.Point(67, 15);
+            this.tableItems.Location = new System.Drawing.Point(66, 15);
             this.tableItems.Name = "tableItems";
+            this.tableItems.ReadOnly = true;
             this.gridItem.SetRowSpan(this.tableItems, 3);
-            this.tableItems.Size = new System.Drawing.Size(556, 228);
+            this.tableItems.Size = new System.Drawing.Size(552, 228);
             this.tableItems.TabIndex = 0;
-            this.tableItems.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.tableItems_CellContentClick);
+            this.tableItems.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.tableItems_CellClick);
             // 
             // precioTxt
             // 
             this.precioTxt.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.precioTxt.AutoSize = true;
             this.precioTxt.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.precioTxt.Location = new System.Drawing.Point(113, 317);
+            this.precioTxt.Location = new System.Drawing.Point(112, 317);
             this.precioTxt.Name = "precioTxt";
             this.precioTxt.Size = new System.Drawing.Size(48, 17);
             this.precioTxt.TabIndex = 9;
@@ -164,7 +167,7 @@
             this.fechaVtoTxt.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.fechaVtoTxt.AutoSize = true;
             this.fechaVtoTxt.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.fechaVtoTxt.Location = new System.Drawing.Point(95, 347);
+            this.fechaVtoTxt.Location = new System.Drawing.Point(94, 347);
             this.fechaVtoTxt.Name = "fechaVtoTxt";
             this.fechaVtoTxt.Size = new System.Drawing.Size(84, 34);
             this.fechaVtoTxt.TabIndex = 10;
@@ -175,7 +178,7 @@
             // 
             this.sumbitBtn.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.gridItem.SetColumnSpan(this.sumbitBtn, 2);
-            this.sumbitBtn.Location = new System.Drawing.Point(159, 390);
+            this.sumbitBtn.Location = new System.Drawing.Point(157, 390);
             this.sumbitBtn.Name = "sumbitBtn";
             this.sumbitBtn.Size = new System.Drawing.Size(110, 27);
             this.sumbitBtn.TabIndex = 6;
@@ -188,7 +191,7 @@
             this.precioInp.AcceptsTab = true;
             this.precioInp.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.precioInp.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.precioInp.Location = new System.Drawing.Point(215, 315);
+            this.precioInp.Location = new System.Drawing.Point(213, 315);
             this.precioInp.Name = "precioInp";
             this.precioInp.Size = new System.Drawing.Size(144, 21);
             this.precioInp.TabIndex = 11;
@@ -198,7 +201,7 @@
             this.fechaVtoInp.AcceptsTab = true;
             this.fechaVtoInp.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.fechaVtoInp.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.fechaVtoInp.Location = new System.Drawing.Point(215, 353);
+            this.fechaVtoInp.Location = new System.Drawing.Point(213, 353);
             this.fechaVtoInp.Name = "fechaVtoInp";
             this.fechaVtoInp.Size = new System.Drawing.Size(144, 21);
             this.fechaVtoInp.TabIndex = 12;
@@ -209,7 +212,7 @@
             this.addBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
             this.addBtn.Cursor = System.Windows.Forms.Cursors.Hand;
             this.addBtn.Image = ((System.Drawing.Image)(resources.GetObject("addBtn.Image")));
-            this.addBtn.Location = new System.Drawing.Point(629, 15);
+            this.addBtn.Location = new System.Drawing.Point(624, 15);
             this.addBtn.Name = "addBtn";
             this.addBtn.Size = new System.Drawing.Size(79, 74);
             this.addBtn.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -223,7 +226,7 @@
             this.deleteBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
             this.deleteBtn.Cursor = System.Windows.Forms.Cursors.Hand;
             this.deleteBtn.Image = ((System.Drawing.Image)(resources.GetObject("deleteBtn.Image")));
-            this.deleteBtn.Location = new System.Drawing.Point(629, 95);
+            this.deleteBtn.Location = new System.Drawing.Point(624, 95);
             this.deleteBtn.Name = "deleteBtn";
             this.deleteBtn.Size = new System.Drawing.Size(79, 73);
             this.deleteBtn.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -237,7 +240,7 @@
             this.updateBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
             this.updateBtn.Cursor = System.Windows.Forms.Cursors.Hand;
             this.updateBtn.Image = ((System.Drawing.Image)(resources.GetObject("updateBtn.Image")));
-            this.updateBtn.Location = new System.Drawing.Point(629, 174);
+            this.updateBtn.Location = new System.Drawing.Point(624, 174);
             this.updateBtn.Name = "updateBtn";
             this.updateBtn.Size = new System.Drawing.Size(79, 69);
             this.updateBtn.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
